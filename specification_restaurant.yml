@@ -1,0 +1,29 @@
+openapi: 3.0.0
+info:
+  title: Restaurant API
+  description: API pour la gestion des clients d'un restaurant
+  version: 1.0.0
+servers:
+  - url: https://localhost.std22122.com
+paths:
+  /customers:
+    get:
+      summary: Récupérer la liste des clients
+      responses:
+        '200':
+          description: Liste des clients
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        name:
+          type: string
+        yearsOld:
+          type: integer
