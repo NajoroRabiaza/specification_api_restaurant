@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Restaurant API
-  description: API pour la gestion des clients d'un restaurant
+  description: un API pour la gestion des clients dans un restaurant
   version: 1.0.0
 servers:
   - url: https://localhost.std22122.com
