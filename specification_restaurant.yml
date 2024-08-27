@@ -50,4 +50,18 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Customer'
-
+    put:
+      summary: Modifier un client existant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '200':
+          description: Client modifié avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
