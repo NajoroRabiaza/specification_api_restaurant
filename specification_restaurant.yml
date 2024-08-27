@@ -65,3 +65,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Customer'
+    delete:
+      summary: Supprimer des clients
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                description: Liste des identifiants des clients à supprimer.
+      responses:
+        '200':
+          description: Clients supprimés avec succès
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Identifiant unique du client
+        name:
+          type: string
+          description: Nom du client
+        email:
+          type: string
+          description: Adresse email du client
+        phone:
+          type: string
+          description: Numéro de téléphone du client
+      required:
+        - id
+        - name
+        - email
