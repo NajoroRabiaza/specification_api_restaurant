@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Restaurant API
-  description: un API pour la gestion des clients dans un restaurant
+  description: Une API pour la gestion des clients dans un restaurant
   version: 1.0.0
 servers:
   - url: https://localhost.std22122.com
@@ -13,17 +13,15 @@ paths:
         - name: page
           in: query
           required: true
-          description: le numero de la page a recuperer
           schema:
             type: integer
-            example: 1
-        - name: pagesize
+          description: Le numéro de la page à récupérer.
+        - name: pageSize
           in: query
           required: true
-          description: le nombre de clients par page
           schema:
             type: integer
-            example: 23
+          description: Le nombre d'éléments par page.
       responses:
         '200':
           description: Liste des clients
@@ -33,12 +31,23 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Customer'
-components:
-  schemas:
-    Customer:
-      type: object
-      properties:
-        name:
-          type: string
-        yearsOld:
-          type: integer
+    post:
+      summary: Créer de nouveaux clients
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Customer'
+      responses:
+        '201':
+          description: Clients créés avec succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+
