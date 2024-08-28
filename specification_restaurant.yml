@@ -107,6 +107,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Meal'
+    put:
+      summary: Modifier un plat existant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Meal'
+      responses:
+        '200':
+          description: Plat modifié avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Meal'
+
 
 components:
   schemas:
