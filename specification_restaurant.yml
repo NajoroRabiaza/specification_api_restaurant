@@ -122,6 +122,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Meal'
+      delete:
+        summary: Supprimer des plats
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  description: Liste des identifiants des plats à supprimer.
+        responses:
+          '200':
+            description: Plats supprimés avec succès
 
 
 components:
