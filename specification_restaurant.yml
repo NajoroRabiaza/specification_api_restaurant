@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Restaurant API
-  description: Une API pour la gestion des clients dans un restaurant
+  description: Une API pour la gestion des clients et des plats dans un restaurant
   version: 1.0.0
 servers:
   - url: https://localhost.std22122.com
@@ -79,6 +79,20 @@ paths:
       responses:
         '200':
           description: Clients supprimés avec succès
+
+  /meals:
+    get:
+      summary: Récupérer la liste des plats
+      responses:
+        '200':
+          description: Liste des plats
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Meal'
+
 components:
   schemas:
     Customer:
