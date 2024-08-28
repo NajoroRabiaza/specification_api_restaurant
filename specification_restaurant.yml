@@ -92,6 +92,21 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Meal'
+    post:
+      summary: Créer un nouveau plat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MealCreation'
+      responses:
+        '201':
+          description: Plat créé avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Meal'
 
 components:
   schemas:
