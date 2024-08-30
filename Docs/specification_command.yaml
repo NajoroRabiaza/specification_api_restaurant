@@ -68,3 +68,80 @@ paths:
               schema:
                 $ref: '#/components/schemas/Order'
 
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Identifiant unique du client
+        name:
+          type: string
+          description: Nom du client
+        email:
+          type: string
+          description: Adresse email du client
+        phone:
+          type: string
+          description: Numéro de téléphone du client
+      required:
+        - id
+        - name
+        - email
+    Meal:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Identifiant unique du plat
+        name:
+          type: string
+          description: Nom du plat
+        price:
+          type: number
+          format: decimal
+          description: Prix du plat
+      required:
+        - name
+        - price
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Identifiant unique de la commande
+        reference:
+          type: string
+          description: Référence de la commande
+        meals:
+          type: array
+          items:
+            type: object
+            properties:
+              meal:
+                $ref: '#/components/schemas/Meal'
+              quantity:
+                type: integer
+        orderDatetime:
+          type: string
+          format: date-time
+          description: Date et heure de la commande
+      required:
+        - reference
+        - meals
+        - orderDatetime
+    OrderCreation:
+      type: object
+      properties:
+        meals:
+          type: array
+          items:
+            type: object
+            properties:
+              meal:
+                $ref: '#/components/schemas/Meal'
+              quantity:
+                type: integer
+      required:
+        - meals
