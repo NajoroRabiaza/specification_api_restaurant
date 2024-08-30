@@ -43,4 +43,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Order'
+    put:
+      summary: Modifier une commande existante d'un client
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          description: Identifiant du client
+        - name: orderId
+          in: path
+          required: true
+          description: Identifiant de la commande
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          description: Commande modifiée avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
 
