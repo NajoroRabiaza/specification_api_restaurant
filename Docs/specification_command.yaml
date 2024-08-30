@@ -1,0 +1,26 @@
+openapi: 3.0.0
+info:
+  title: Restaurant API
+  description: Une API pour la gestion d'un restaurant, incluant les clients, les plats et les commandes
+  version: 1.0.0
+servers:
+  - url: https://localhost.std22122.com
+paths:
+  /customers/{customerId}/orders:
+    get:
+      summary: Récupérer la liste des commandes d'un client
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          description: Identifiant du client
+      responses:
+        '200':
+          description: Liste des commandes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+
