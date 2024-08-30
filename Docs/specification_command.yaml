@@ -23,4 +23,24 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Order'
+    post:
+      summary: Créer une nouvelle commande pour un client
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          description: Identifiant du client
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderCreation'
+      responses:
+        '201':
+          description: Commande créée avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
 
