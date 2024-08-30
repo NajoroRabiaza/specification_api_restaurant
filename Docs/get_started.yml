@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Restaurant API
-  description: API pour la gestion des clients d'un restaurant
+  description: Une API pour la gestion des clients et des plats dans un restaurant
   version: 1.0.0
 servers:
   - url: https://localhost.std22122.com
@@ -9,6 +9,19 @@ paths:
   /customers:
     get:
       summary: Récupérer la liste des clients
+      parameters:
+        - name: page
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: Le numéro de la page à récupérer.
+        - name: pageSize
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: Le nombre d'éléments par page.
       responses:
         '200':
           description: Liste des clients
@@ -18,12 +31,162 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Customer'
+    post:
+      summary: Créer de nouveaux clients
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Customer'
+      responses:
+        '201':
+          description: Clients créés avec succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+    put:
+      summary: Modifier un client existant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '200':
+          description: Client modifié avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+    delete:
+      summary: Supprimer des clients
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                description: Liste des identifiants des clients à supprimer.
+      responses:
+        '200':
+          description: Clients supprimés avec succès
+
+  /meals:
+    get:
+      summary: Récupérer la liste des plats
+      responses:
+        '200':
+          description: Liste des plats
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Meal'
+    post:
+      summary: Créer un nouveau plat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MealCreation'
+      responses:
+        '201':
+          description: Plat créé avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Meal'
+    put:
+      summary: Modifier un plat existant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Meal'
+      responses:
+        '200':
+          description: Plat modifié avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Meal'
+    delete:
+      summary: Supprimer des plats
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                description: Liste des identifiants des plats à supprimer.
+      responses:
+        '200':
+          description: Plats supprimés avec succès
+
 components:
   schemas:
     Customer:
       type: object
       properties:
+        id:
+          type: string
+          description: Identifiant unique du client
         name:
           type: string
-        yearsOld:
-          type: integer
+          description: Nom du client
+        email:
+          type: string
+          description: Adresse email du client
+        phone:
+          type: string
+          description: Numéro de téléphone du client
+      required:
+        - id
+        - name
+        - email
+
+    Meal:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Identifiant unique du plat
+        name:
+          type: string
+          description: Nom du plat
+        price:
+          type: number
+          format: float
+          description: Prix du plat
+      required:
+        - id
+        - name
+        - price
+
+    MealCreation:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Nom du plat
+        price:
+          type: number
+          format: float
+          description: Prix du plat
+      required:
+        - name
+        - price
